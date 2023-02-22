@@ -17,9 +17,9 @@ Run proof of concept:
 python3 clickjack.py --PoC -t http://example.com
 ```
 
-Run a clickjacking web server to attack: **{ Not Implemented }**
+Run a clickjacking web server to attack:
 ```
-python3 clickjack.py -t http://example.com -lh example.io -lp 443
+python3 clickjack.py -t http://example.com -lh 127.0.0.1 -lp 443
 ```
 
 ## Manual Usage

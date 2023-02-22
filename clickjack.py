@@ -42,9 +42,8 @@ def analyze(url):
 
 def clickjackingPoC():
     analyze(TARGET)
-    PoC_Server.target = TARGET
     print("[+] PoC of Clickjacking using " + TARGET)
-    webServer = HTTPServer((HOST, int(PORT)), PoC_Server) #SimpleHTTPRequestHandleri)
+    webServer = HTTPServer((HOST, int(PORT)), PoC_Server)
     print("[+] Web-Server mounted in http://" + HOST + ":" + str(PORT))
     try:
         webServer.serve_forever()
@@ -56,7 +55,7 @@ def clickjackingPoC():
 def clickjackingHack():
     analyze(TARGET)
     print("[+] Clickjacking Attack using " + TARGET)
-    webServer = HTTPServer((HOST, int(PORT)), Hack_Server) #SimpleHTTPRequestHandleri)
+    webServer = HTTPServer((HOST, int(PORT)), Hack_Server)
     print("[+] Web-Server mounted in http://" + HOST + ":" + str(PORT))
     try:
         webServer.serve_forever()
